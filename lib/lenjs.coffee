@@ -28,7 +28,7 @@ module.exports =
     set: (state, val) -> val
 
   merge: new Lens
-    get: (state) -> state[index]
+    get: (state) -> state
     set: (state, newVal) -> update(state, (newState) -> newState[x] = y for x, y of newVal)
 
   push: new Lens
