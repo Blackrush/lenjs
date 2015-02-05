@@ -12,21 +12,34 @@ Ltest[x] = lenses.at(x) for x in ["a", "b", "c", "d", "e", "f", "g", "h"]
 describe 'lenses', ->
   describe '.at', ->
     describe '-> a -> b -> c', ->
-      it 'should return an object', ->
-        lens = Ltest.a.compose(Ltest.b).compose(Ltest.c)
+      lens = Ltest.a.compose(Ltest.b).compose(Ltest.c)
 
+      it 'should return an object', ->
         lens.get(test).should.eql('Hello, World')
+
+      it 'should set an object', ->
+        newTest = lens.set(test, 'Bonjour le Monde !')
+
+        newTest.a.b.c.should.eql 'Bonjour le Monde !'
 
   describe '.push', ->
     describe '-> a -> b -> d', ->
+      lens = Ltest.a.compose(Ltest.b).compose(Ltest.d)
+
+      it 'should return the array', ->
+        lens.get(test).should.eql ['hello', 'bonjour']
+
       it 'should push a string to the array', ->
-        lens = Ltest.a.compose(Ltest.b).compose(Ltest.d)
         newTest = lens.compose(lenses.push).set(test, "hola")
 
         lens.get(newTest).should.eql(['hello', 'bonjour', 'hola'])
 
   describe '.merge', ->
     describe '-> a', ->
+      it 'should return the object', ->
+        newTest = lenses.merge.get(test)
+        newTest.should.eql test
+
       it 'should merge objects', ->
         newTest = lenses.merge.set(test, {foo: "bar"})
 
@@ -34,6 +47,9 @@ describe 'lenses', ->
 
   describe '.id', ->
     describe '-> a', ->
+      it 'should return the initial object', ->
+        lenses.id.get(test).should.eql test
+
       it 'should totally wipe out initial object', ->
         newTest = lenses.id.set(test, 42)
 
