@@ -8,7 +8,7 @@ export class Lens
   ({@get, @set}) ->
 
   compose: (other) ~>
-    new Lens
+    new Lens do
       get: ~> other.get(@get(it))
       set: (state, val) ~~> @set(state, other.set(@get(state), val))
 
@@ -19,7 +19,7 @@ export class LensDo
     this
   unwrap: -> @state
 
-export do = -> new LensDo(it)
+export apply = -> new LensDo(it)
 
 export id = new Lens
   get: -> it
@@ -34,7 +34,6 @@ export push = new Lens do
   set: (state, newVal) --> update(state, (.push(newVal)))
 
 export at = (index) ->
-  new Lens
+  new Lens do
     get: (.[index])
     set: (state, newVal) --> update(state, (.[index] = newVal))
-
