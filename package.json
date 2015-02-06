@@ -1,6 +1,6 @@
 {
   "name": "lenjs",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Lens in JS",
   "main": "lib/lenjs.js",
   "scripts": {
@@ -16,5 +16,19 @@
     "coffee-script": "^1.9.0",
     "mocha": "^2.1.0",
     "should": "^4.6.5"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Blackrush/lenjs.git"
+  },
+  "keywords": [
+    "lens",
+    "lenses"
+  ],
+  "bugs": {
+    "url": "https://github.com/Blackrush/lenjs/issues"
   }
 }
